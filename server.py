@@ -20,7 +20,7 @@ def add_subscriber():
   URI = data.get('URI')
   if name is not None and URI is not None:
       subscribers[name] = URI
-      return jsonify({"message": f"added subscriber: {name} with {URI}"})
+      return jsonify({"message": f"added subscriber: {name}@{URI}"})
   else:
       return jsonify({"message": "bad request"}), 400
 
@@ -48,8 +48,8 @@ def notify():
     if payload is None:
         return jsonify({"message": "bad request"}), 400
     print(f"notify payload: {payload}")
-    for k,v in subscribers:
-        print(f"notifying {k}@{v}\n")
+    for k,v in subscribers.items():
+        print(f"notifying {k}@{v}")
 
     return jsonify({"message": "notify complete"})
 
